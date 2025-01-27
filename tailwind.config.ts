@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+import plugin from "tailwindcss/plugin";
 
 export default {
   content: [
@@ -14,5 +15,27 @@ export default {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    plugin(function ({ addUtilities }) {
+      const newUtilities = {
+        ".transform-style-preserve-3d": {
+          "transform-style": "preserve-3d",
+        },
+        ".backface-hidden": {
+          "backface-visibility": "hidden",
+        },
+        ".rotate-y-180": {
+          transform: "rotateX(180deg)",
+        },
+        ".flip-x": {
+          transform: "scaleX(-1)",
+        },
+        ".flip-y": {
+          transform: "scaleY(-1)",
+        },
+      };
+
+      addUtilities(newUtilities);
+    }),
+  ],
 } satisfies Config;

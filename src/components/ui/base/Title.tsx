@@ -17,7 +17,7 @@ export const Title = ({
   return (
     <div
       className={clsx(
-        "text-xl sm:text-2xl md:text-4xl lg:text-4xl xl:text-5xl font-extrabold bg-clip-text text-transparent transition-all duration-300 cursor-default w-fit",
+        "text-xl sm:text-2xl md:text-4xl lg:text-4xl xl:text-5xl font-black bg-clip-text text-transparent transition-all duration-300 cursor-default w-fit",
         textbg,
         hoverBg
       )}

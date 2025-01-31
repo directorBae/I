@@ -6,3 +6,68 @@
 
 // QueryString이 없으면, 404 페이지로 이동시키기
 // QueryString이 잘못된 경우, 404 페이지로 이동시키기
+"use client";
+
+import { motion } from "framer-motion";
+import { useGraphState } from "@/hooks/useGraphState";
+import { useEffect } from "react";
+import { useState } from "react";
+
+type ArticleProps = {
+  id: string;
+};
+
+export const HoverArticle = () => {
+  const { hoveredNode, contentsData } = useGraphState();
+  const [currentHoveredNode, setCurrentHoveredNode] = useState(hoveredNode);
+
+  useEffect(() => {
+    if (hoveredNode) {
+      setCurrentHoveredNode(hoveredNode); // ✅ 내부 상태 업데이트
+    }
+  }, [hoveredNode]); // ✅ `hoveredNode` 변경 감지
+
+  if (
+    !currentHoveredNode ||
+    !contentsData ||
+    !contentsData[currentHoveredNode]
+  ) {
+    return null;
+  }
+
+  return (
+    <motion.div
+      initial={{ x: "100%" }}
+      animate={{ x: 0 }}
+      exit={{ x: "100%" }}
+      transition={{ type: "tween", duration: 0.4 }}
+      className="absolute top-0 right-0 w-24 h-full bg-white p-6 shadow-lg overflow-auto z-10"
+    >
+      <div className="rotate-90 transform translate-x-6 origin-left w-96 font-black text-6xl z-10">
+        {contentsData && contentsData[hoveredNode || 0]?.title}
+      </div>
+    </motion.div>
+  );
+};
+
+export const Article = ({ id }: ArticleProps) => {
+  const { contentsData } = useGraphState();
+
+  if (!contentsData || !contentsData[id]) {
+    return null;
+  }
+
+  return (
+    <motion.div
+      initial={{ x: "100%" }}
+      animate={{ x: 0 }}
+      exit={{ x: "100%" }}
+      transition={{ type: "tween", duration: 0.4 }}
+      className="absolute top-0 right-0 w-24 h-full bg-white p-6 shadow-lg overflow-auto"
+    >
+      <div className="rotate-90 transform translate-x-6 origin-left w-96 font-black text-6xl">
+        {contentsData && contentsData[id]?.title}
+      </div>
+    </motion.div>
+  );
+};

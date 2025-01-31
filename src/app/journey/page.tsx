@@ -82,7 +82,7 @@ export default function JourneyPage() {
       <div className="relative group">
         <Title
           text={text}
-          hoverBg="hover:bg-[url('@public/imgs/doltexture.png')] bg-cover bg-center"
+          hoverBg="hover:bg-[url('/imgs/doltexture.png')] bg-cover bg-center"
         />
         <div className="absolute z-10 md:translate-x-36 lg:translate-x-44 xl:translate-x-60 -translate-y-4 hidden group-hover:block">
           <TitlePopup

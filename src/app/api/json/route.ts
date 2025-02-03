@@ -6,7 +6,11 @@ import { ContentType } from "@/types/types";
 // ✅ API 라우트에서 JSON 파일 불러오기
 export async function GET() {
   try {
-    const dir = path.join(process.cwd(), "public/jsons/work/articles/mock");
+    const dir =
+      process.env.DEV_ENV === "development"
+        ? path.join(process.cwd(), "public/jsons/work/articles/mock")
+        : path.join(process.cwd(), "public/jsons/work/articles");
+
     const files = fs.readdirSync(dir);
     const data: ContentType[] = files
       .filter((file) => file.endsWith(".json"))

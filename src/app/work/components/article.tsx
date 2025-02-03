@@ -8,66 +8,63 @@
 // QueryString이 잘못된 경우, 404 페이지로 이동시키기
 "use client";
 
-import { motion } from "framer-motion";
-import { useGraphState } from "@/hooks/useGraphState";
-import { useEffect } from "react";
-import { useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import { useGraphState } from "@/context/GraphContext";
+import LinkIcon from "@public/svgs/link.svg";
+import Image from "next/image";
+import SwipeHolder from "@public/svgs/swipeHolder.svg";
+import { useRouter } from "next/navigation";
 
 type ArticleProps = {
   id: string;
 };
 
-export const HoverArticle = () => {
-  const { hoveredNode, contentsData } = useGraphState();
-  const [currentHoveredNode, setCurrentHoveredNode] = useState(hoveredNode);
-
-  useEffect(() => {
-    if (hoveredNode) {
-      setCurrentHoveredNode(hoveredNode); // ✅ 내부 상태 업데이트
-    }
-  }, [hoveredNode]); // ✅ `hoveredNode` 변경 감지
-
-  if (
-    !currentHoveredNode ||
-    !contentsData ||
-    !contentsData[currentHoveredNode]
-  ) {
-    return null;
-  }
-
-  return (
-    <motion.div
-      initial={{ x: "100%" }}
-      animate={{ x: 0 }}
-      exit={{ x: "100%" }}
-      transition={{ type: "tween", duration: 0.4 }}
-      className="absolute top-0 right-0 w-24 h-full bg-white p-6 shadow-lg overflow-auto z-10"
-    >
-      <div className="rotate-90 transform translate-x-6 origin-left w-96 font-black text-6xl z-10">
-        {contentsData && contentsData[hoveredNode || 0]?.title}
-      </div>
-    </motion.div>
-  );
-};
-
 export const Article = ({ id }: ArticleProps) => {
-  const { contentsData } = useGraphState();
+  const { contentsData, setHoveredNode, setIsShowSide } = useGraphState();
 
-  if (!contentsData || !contentsData[id]) {
-    return null;
-  }
+  const router = useRouter();
+
+  const clickSwiper = () => {
+    setHoveredNode(id);
+    setIsShowSide(true);
+    router.push(`/work`);
+  };
+
+  const shouldRender = contentsData && contentsData[id];
 
   return (
-    <motion.div
-      initial={{ x: "100%" }}
-      animate={{ x: 0 }}
-      exit={{ x: "100%" }}
-      transition={{ type: "tween", duration: 0.4 }}
-      className="absolute top-0 right-0 w-24 h-full bg-white p-6 shadow-lg overflow-auto"
-    >
-      <div className="rotate-90 transform translate-x-6 origin-left w-96 font-black text-6xl">
-        {contentsData && contentsData[id]?.title}
-      </div>
-    </motion.div>
+    <AnimatePresence>
+      {shouldRender && (
+        <motion.div
+          initial={{ x: "100%" }}
+          animate={{ x: 0 }}
+          exit={{ x: "100%" }}
+          transition={{ type: "tween", duration: 0.4 }}
+          className="absolute top-0 right-0 h-full w-full bg-[#fafafa] px-6 py-10 shadow-lg verflow-y-auto rounded-tl-2xl rounded-bl-2xl"
+          style={{ width: "93.75%" }}
+        >
+          <div className="absolute transform -translate-x-full left-0 z-50">
+            <Image
+              src={SwipeHolder}
+              alt="swipe holder"
+              onClick={() => clickSwiper()}
+              className="cursor-pointer"
+            />
+          </div>
+          <div className="flex flex-col gap-20 pl-6">
+            <div className="flex justify-between items-center pr-20">
+              <div className="transform font-black text-6xl opacity-10">
+                {contentsData && contentsData[id]?.title}
+              </div>
+              <Image src={LinkIcon} alt="link icon" />
+            </div>
+            <div className="h-[0.5] bg-gray-300 w-10" />
+            <div className="text-lg min-h-lvh">
+              {contentsData && contentsData[id]?.content}
+            </div>
+          </div>
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 };

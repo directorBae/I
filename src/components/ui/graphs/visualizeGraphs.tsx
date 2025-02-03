@@ -1,18 +1,44 @@
 "use client";
 
 import { Graph } from "react-d3-graph";
-import { useGraphState } from "@/hooks/useGraphState";
+import { useGraphState } from "@/context/GraphContext";
 import LoadingSpinner from "../assets/clipLoader";
+import { useEffect, useState } from "react";
 
 const GraphComponent = () => {
   const {
-    selectedNode,
-    setSelectedNode,
     hoveredNode,
     setHoveredNode,
+    isShowSide,
     graphData,
     clickNode,
+    parseNearbyNodes,
   } = useGraphState();
+  const [nearbyNodes, setNearbyNodes] = useState<string[]>([]);
+
+  useEffect(() => {
+    if (isShowSide && hoveredNode) {
+      const nodes = parseNearbyNodes(hoveredNode);
+      setNearbyNodes(nodes);
+    } else {
+      setNearbyNodes([]);
+    }
+  }, [hoveredNode, isShowSide, parseNearbyNodes]);
+
+  // graphData가 존재할 때만 수정된 데이터를 생성합니다.
+  const modifiedGraphData = graphData
+    ? {
+        ...graphData,
+        nodes: graphData.nodes.map((node: any) => ({
+          ...node,
+          // isShowSide && hoveredNode가 있고 nearbyNodes에 포함되지 않은 경우 투명하게
+          opacity:
+            isShowSide && hoveredNode && !nearbyNodes.includes(node.id)
+              ? 0.3
+              : 0.9,
+        })),
+      }
+    : null;
 
   if (!graphData) {
     return (
@@ -25,7 +51,6 @@ const GraphComponent = () => {
   // ✅ 노드 Hover 이벤트
   const handleMouseOverNode = (nodeId: string | undefined) => {
     if (!nodeId || nodeId === hoveredNode) return; // ✅ 같은 값이면 업데이트 방지
-    console.log("🔵 Hovered Node Detected:", nodeId);
     setHoveredNode(nodeId);
   };
 
@@ -54,6 +79,9 @@ const GraphComponent = () => {
     },
   };
 
+  //isShowSide가 true이고 hoveredNode가 존재할 때,
+  // 주변 노드 이외는 조금 투명하게 만들어주기
+
   return (
     <div className="flex w-screen justify-center items-center pt-28 pb-40">
       <svg width="0" height="0">
@@ -63,12 +91,23 @@ const GraphComponent = () => {
           </filter>
         </defs>
       </svg>
+      {/*
+        isShowSide가 true이고 hoveredNode가 존재할 때,
+        주변 노드 이외는 조금 투명하게 만들어주기
+      */}
 
-      {/* ✅ `graphData`가 존재할 때만 `Graph` 렌더링 */}
-      {graphData && (
+      <style>
+        {`
+          .node {
+            transition: opacity 0.3s;
+          }
+        `}
+      </style>
+
+      {modifiedGraphData && (
         <Graph
           id="graph-d3"
-          data={graphData}
+          data={modifiedGraphData}
           config={graphConfig}
           onMouseOverNode={handleMouseOverNode}
           onMouseOutNode={handleMouseOutNode}

@@ -1,17 +1,13 @@
 {
-  "id": 0,
+  "id": 1,
   "title": "프로젝트1",
   "date": "2021-01-01",
   "links": {
-    "github": "blah",
-    "website": "blah"
+    "github": "https://github.com",
+    "website": "https://team-bbabam-bbabam.github.io/bbabam-web/"
   },
   "dataType": "markdown",
-  "category": "project",
-  "content": "# Hello World\n## Bye World\n\n```python\nprint('Hello World')\n```",
-  "edge": [
-    { "id": 1, "content": "이것은 아주 연관이 있었습니다." },
-    { "id": 3, "content": "이것은 매우 연관이 있었습니다." },
-    { "id": 4, "content": "이것은 좋은 연관이 있었습니다." }
-  ]
+  "category": "article",
+  "content": "# Hello World \n ## Bye World\n\n ```python\nprint('Hello World')\n```",
+  "edge": []
 }

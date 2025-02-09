@@ -1,10 +1,10 @@
-@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/static/pretendard.css");
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/static/pretendard.css');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 body {
-  font-family: "Pretendard", sans-serif;
+  font-family: 'Pretendard', sans-serif;
 }
 
 /* 스크롤바 전체 영역 */
@@ -27,4 +27,89 @@ body {
 /* 스크롤바 손잡이 hover 상태 */
 ::-webkit-scrollbar-thumb:hover {
   background: #222;
+}
+
+/* Markdown 스타일링 */
+.prose h1 {
+  font-size: 2.5rem;
+  font-weight: bold;
+}
+
+.prose h2 {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.prose h3 {
+  font-size: 1.75rem;
+  font-weight: bold;
+}
+
+.prose h4 {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.prose h5 {
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.prose code {
+  background-color: #f3f4f6;
+  padding: 0.2rem 0.4rem;
+  border-radius: 5px;
+}
+
+.prose p {
+  @apply text-base leading-relaxed my-4 text-gray-700;
+}
+
+.prose a {
+  @apply text-blue-500 underline hover:text-blue-700;
+}
+
+.prose ul {
+  @apply list-disc pl-5 space-y-1;
+}
+
+.prose ol {
+  @apply list-decimal pl-5 space-y-1;
+}
+
+.prose li {
+  @apply text-gray-700;
+}
+
+.prose blockquote {
+  @apply border-l-4 border-gray-300 italic text-gray-600 pl-4 py-2 my-4 bg-gray-50;
+}
+
+.prose pre {
+  @apply bg-gray-900 text-white text-sm p-4 rounded-md overflow-x-auto;
+}
+
+.prose pre code {
+  @apply bg-transparent text-white p-0;
+}
+
+.prose table {
+  @apply w-full border-collapse border border-gray-300 my-4;
+}
+
+.prose th,
+.prose td {
+  @apply border border-gray-300 px-4 py-2;
+}
+
+.prose th {
+  @apply bg-gray-100 text-left font-semibold;
+}
+
+.prose strong {
+  @apply font-semibold text-gray-900;
+}
+
+.prose hr {
+  @apply border-t border-gray-300 my-6;
 }

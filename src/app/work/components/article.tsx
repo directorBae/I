@@ -17,6 +17,7 @@ import Image from 'next/image';
 import SwipeHolder from '@public/svgs/swipeHolder.svg';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
+import MarkdownRenderer from '@/components/ui/renderer/MdRenderer';
 
 type HoverIdProps = {
   node: {
@@ -210,7 +211,9 @@ export const Article = ({ id }: ArticleProps) => {
               </div>
               <div className="h-[0.5] bg-gray-300 w-10" />
               <div className="text-lg min-h-lvh">
-                {contentsData && contentsData[id]?.content}
+                {contentsData && (
+                  <MarkdownRenderer content={contentsData[id]?.content} />
+                )}
               </div>
               <div className="relative flex mt-10 justify-center h-[800px] overflow-hidden items-end">
                 {hoverNode !== null ? (

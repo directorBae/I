@@ -1,12 +1,13 @@
 //contentId -> content
-import { Suspense } from "react";
-import GraphComponent from "@/components/ui/graphs/visualizeGraphs";
-import { Title } from "@/components/ui/base/Title";
-import { Article } from "./components/article";
-import { HoverArticle } from "./components/hover";
-import LoadingSpinner from "@/components/ui/assets/clipLoader";
-import { GraphStateProvider } from "@/context/GraphContext";
-import Link from "next/link";
+import { Suspense } from 'react';
+import GraphComponent from '@/components/ui/graphs/visualizeGraphs';
+import { Title } from '@/components/ui/base/Title';
+import { Article } from './components/article';
+import { HoverArticle } from './components/hover';
+import LoadingSpinner from '@/components/ui/assets/clipLoader';
+import { GraphStateProvider } from '@/context/GraphContext';
+import { headers } from 'next/headers';
+import { MobileWork } from '@/components/ui/layout/mobileWorkView';
 
 interface WorkPageProps {
   searchParams: Promise<{ id: string }>;
@@ -14,6 +15,8 @@ interface WorkPageProps {
 
 export default async function WorkPage({ searchParams }: WorkPageProps) {
   const { id: selectedId } = await searchParams;
+  const userAgent = (await headers()).get('user-agent') || '';
+  const isMobile = /iPhone|Android|iPad|Mobile/i.test(userAgent);
 
   return (
     <GraphStateProvider>
@@ -22,15 +25,21 @@ export default async function WorkPage({ searchParams }: WorkPageProps) {
         <div className="absolute top-0 left-0 w-full h-full bg-black opacity-50 z-10" />
         <div className="absolute flex p-12 w-screen h-screen flex-col gap-2 z-30">
           <Title text="Work" />
-          <div className="flex justify-center items-center">
-            <GraphComponent />
-          </div>
-          <Suspense fallback={<LoadingSpinner />}>
-            <Article id={selectedId} />
-          </Suspense>
-          <Suspense>
-            <HoverArticle />
-          </Suspense>
+          {isMobile ? (
+            <MobileWork />
+          ) : (
+            <>
+              <div className="flex justify-center items-center">
+                <GraphComponent />
+              </div>
+              <Suspense fallback={<LoadingSpinner />}>
+                <Article id={selectedId} />
+              </Suspense>
+              <Suspense>
+                <HoverArticle />
+              </Suspense>
+            </>
+          )}
         </div>
       </div>
     </GraphStateProvider>

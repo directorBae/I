@@ -1,12 +1,12 @@
 // GraphStateContext.tsx
-"use client";
+'use client';
 
-import { createContext, useContext, useState, useEffect } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
-import Graph from "@/model/graph";
-import { ContentType } from "@/types/types";
+import { createContext, useContext, useState, useEffect } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
+import Graph from '@/model/graph';
+import { ContentType } from '@/types/types';
 
-import { ReactNode } from "react";
+import { ReactNode } from 'react';
 
 interface GraphStateContextType {
   selectedNode: string | null;
@@ -17,16 +17,21 @@ interface GraphStateContextType {
   setIsShowSide: (show: boolean) => void;
   hoverData: { id: string; title: string; date: string } | null;
   setHoverData: (
-    data: { id: string; title: string; date: string } | null
+    data: { id: string; title: string; date: string } | null,
   ) => void;
   graphData: any | null;
   contentsData: { [key: string]: ContentType } | null;
   clickNode: (nodeId: string) => void;
   parseNearbyNodes: (nodeId: string) => string[];
+  parseNearbyNodesWithTitle: (nodeId: string) => {
+    id: string;
+    title: string;
+    date: string;
+  }[];
 }
 
 export const GraphStateContext = createContext<GraphStateContextType | null>(
-  null
+  null,
 );
 
 export const GraphStateProvider = ({ children }: { children: ReactNode }) => {
@@ -54,12 +59,13 @@ export const GraphStateProvider = ({ children }: { children: ReactNode }) => {
   };
 
   useEffect(() => {
-    fetch("/api/json")
+    fetch('/api/json')
       .then((res) => res.json())
       .then((data) => {
         setContentsData(convertContentsData(data));
         const graphData = new Graph(data).graphData;
         setGraphData(graphData);
+        console.log(graphData);
       });
   }, []);
 
@@ -83,6 +89,27 @@ export const GraphStateProvider = ({ children }: { children: ReactNode }) => {
     return Array.from(new Set(nearbyNodes) || []);
   };
 
+  const parseNearbyNodesWithTitle = (nodeId: string) => {
+    if (!graphData) return [];
+    const nearbyNodes = parseNearbyNodes(nodeId);
+    return nearbyNodes
+      .map((node) => {
+        if (!contentsData) return undefined;
+        // 본인 제외
+        if (node === nodeId) return undefined;
+        return {
+          id: node,
+          title: contentsData[node].title,
+          date: contentsData[node].date,
+        };
+      })
+      .filter((node) => node !== undefined) as {
+      id: string;
+      title: string;
+      date: string;
+    }[];
+  };
+
   return (
     <GraphStateContext.Provider
       value={{
@@ -98,6 +125,7 @@ export const GraphStateProvider = ({ children }: { children: ReactNode }) => {
         contentsData,
         clickNode,
         parseNearbyNodes,
+        parseNearbyNodesWithTitle,
       }}
     >
       {children}
@@ -108,7 +136,7 @@ export const GraphStateProvider = ({ children }: { children: ReactNode }) => {
 export const useGraphState = () => {
   const state = useContext(GraphStateContext);
   if (!state) {
-    throw new Error("Cannot find GraphStateProvider");
+    throw new Error('Cannot find GraphStateProvider');
   }
   return state;
 };

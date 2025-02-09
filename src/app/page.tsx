@@ -2,7 +2,7 @@ import { SNSButton } from "@/components/ui/base/SNSButton";
 import { ContactInfo } from "@/components/ui/base/ContactInfo";
 import { D3Section } from "@/components/transition/3d/section";
 import { headers } from "next/headers";
-import { MobileHomeGrid } from "./components/mobileHomeView";
+import { MobileHomeGrid } from "../components/ui/layout/mobileHomeView";
 
 export default async function Home() {
   const userAgent = (await headers()).get("user-agent") || "";

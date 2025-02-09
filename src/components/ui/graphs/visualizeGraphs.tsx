@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import { Graph } from "react-d3-graph";
-import { useGraphState } from "@/context/GraphContext";
-import LoadingSpinner from "../assets/clipLoader";
-import { useEffect, useState } from "react";
+import { Graph } from 'react-d3-graph';
+import { useGraphState } from '@/context/GraphContext';
+import LoadingSpinner from '../assets/clipLoader';
+import { useEffect, useState } from 'react';
 
 const GraphComponent = () => {
   const {
@@ -15,14 +15,25 @@ const GraphComponent = () => {
     parseNearbyNodes,
   } = useGraphState();
   const [nearbyNodes, setNearbyNodes] = useState<string[]>([]);
+  const [nearbyEdges, setNearbyEdges] = useState<
+    { source: string; target: string }[]
+  >([]);
 
   useEffect(() => {
     if (isShowSide && hoveredNode) {
       const nodes = parseNearbyNodes(hoveredNode);
       setNearbyNodes(nodes);
+      const edges = graphData.links.filter(
+        (link: any) =>
+          link.source === hoveredNode || link.target === hoveredNode,
+      );
+      setNearbyEdges(edges);
+      console.log(edges);
     } else {
       setNearbyNodes([]);
+      setNearbyEdges([]);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [hoveredNode, isShowSide, parseNearbyNodes]);
 
   // graphData가 존재할 때만 수정된 데이터를 생성합니다.
@@ -36,6 +47,20 @@ const GraphComponent = () => {
             isShowSide && hoveredNode && !nearbyNodes.includes(node.id)
               ? 0.3
               : 0.9,
+        })),
+        links: graphData.links.map((link: any) => ({
+          ...link,
+          strokeWidth:
+            isShowSide &&
+            hoveredNode &&
+            !nearbyEdges.some((edge) => {
+              return (
+                (edge.source === link.source && edge.target === link.target) ||
+                (edge.source === link.target && edge.target === link.source)
+              );
+            })
+              ? 0.1
+              : 1.5,
         })),
       }
     : null;
@@ -67,13 +92,17 @@ const GraphComponent = () => {
 
   const graphConfig = {
     node: {
-      color: "white",
+      color: 'white',
       size: 400,
       opacity: 0.9,
       renderLabel: false,
-      svg: "./svgs/node.svg",
+      svg: './svgs/node.svg',
+    },
+    link: {
+      strokeWidth: 1.5,
     },
     width: 400,
+    height: 500,
     d3: {
       gravity: -50 * (10 - (graphData?.nodes.length || 0) / 10),
     },
@@ -91,7 +120,7 @@ const GraphComponent = () => {
           </filter>
         </defs>
       </svg>
-      {/*
+      {/* 
         isShowSide가 true이고 hoveredNode가 존재할 때,
         주변 노드 이외는 조금 투명하게 만들어주기
       */}
@@ -100,6 +129,11 @@ const GraphComponent = () => {
         {`
           .node {
             transition: opacity 0.3s;
+          }
+          
+          .link {
+            transition: filter 0.3s;
+            filter: blur(1px);
           }
         `}
       </style>

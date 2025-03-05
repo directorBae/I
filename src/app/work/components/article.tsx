@@ -11,10 +11,10 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import { useGraphState } from '@/context/GraphContext';
 import LinkIcon from '@public/svgs/link.svg';
-import { Globe } from 'lucide-react';
 import GithubIcon from '@public/svgs/github.svg';
 import Image from 'next/image';
 import SwipeHolder from '@public/svgs/swipeHolder.svg';
+import GlobeIcon from '@public/svgs/globe.svg';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import MarkdownRenderer from '@/components/ui/renderer/MdRenderer';
@@ -111,7 +111,7 @@ export const Article = ({ id }: ArticleProps) => {
       <div className="absolute w-20 h-20 opacity-20">
         {type === 'website' ? (
           <div className="flex justify-center items-center gap-8">
-            <Globe size={80} />
+            <Image src={GlobeIcon} width={80} alt="link icon" />
           </div>
         ) : (
           <div className="flex justify-center items-center gap-8">

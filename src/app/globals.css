@@ -86,7 +86,7 @@ body {
 }
 
 .prose pre {
-  @apply bg-gray-900 text-white text-sm p-4 rounded-md overflow-x-auto;
+  @apply bg-gray-900 text-white text-sm p-4 rounded-md overflow-x-auto w-3/5;
 }
 
 .prose pre code {

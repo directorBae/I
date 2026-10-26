@@ -113,3 +113,28 @@ body {
 .prose hr {
   @apply border-t border-gray-300 my-6;
 }
+
+.prose .md-figure {
+  display: block;
+  margin: 1.75rem 0;
+}
+
+.prose .md-figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 70vh;
+  object-fit: contain;
+  border-radius: 12px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  background: #f1f1f1;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+}
+
+.prose .md-caption {
+  display: block;
+  margin-top: 0.6rem;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: #8a8a8a;
+}

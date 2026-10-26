@@ -1,13 +1,13 @@
 {
   "id": 20,
   "title": "사진대학 웹 어플리케이션 v2",
-  "date": "",
+  "date": "2024.03",
   "links": {
     "github": "",
     "website": ""
   },
   "dataType": "markdown",
   "category": "project",
-  "content": "# 사진대학 웹 어플리케이션 v2\n\n내용을 준비하고 있습니다.",
+  "content": "# 사진대학 웹 어플리케이션 v2\n\n[v1](/work?id=19)이 사진을 꾸며 인화하는 데 집중했다면, v2는 사진과 정보를 받아 재미있는 결과물로 바꿔 출력하는 콘텐츠형 키오스크입니다. React 프론트엔드와 Flask 백엔드를 직접 개발해 AWS EC2에 배포했습니다.\n\n## 키오스크와 휴대폰을 잇는 흐름\n\n키오스크 홈에서 콘텐츠를 고르면 설명을 보고 Bootpay로 카카오페이 결제(2000원)를 합니다. 결제가 끝나면 화면에 QR 코드가 뜨고, 사용자는 휴대폰에서 정보를 입력하거나 사진을 올립니다. 키오스크는 5초마다 서버에 결과를 확인하다가 이미지가 준비되면 내려받아 출력하고, 5분 동안 입력이 없으면 홈 화면으로 돌아갑니다.\n\n## 두 가지 콘텐츠\n\n- **윤이가 말아주는 유니스트 재학증명서**: 이름, 학번, 입학일자를 입력하면 서버가 Pillow로 템플릿 위에 글자를 얹어 증명서 이미지를 만듭니다.\n- **관상으로 알아보는 환상&환장의 궁합**: 올린 사진에서 Google Cloud Vision API로 얼굴과 표정 정보를 찾고, 사용자가 인식 결과를 확인하면 가장 잘 맞는 짝과 가장 안 맞는 짝을 골라 문구와 함께 결과 이미지로 만듭니다.\n\n![궁합 콘텐츠의 키오스크 QR 화면과 휴대폰 업로드·얼굴 인식 확인 화면](/imgs/work/20-1.png)\n\n![재학증명서 콘텐츠의 키오스크 QR 화면과 휴대폰 입력 폼](/imgs/work/20-2.png)\n\n## 스택\n\n- 프론트엔드: React, React Router, styled-components, react-spring, qrcode.react, Bootpay\n- 백엔드: Flask, Flask-SQLAlchemy(SQLite), Flask-Migrate, Pillow, Google Cloud Vision API\n",
   "edge": []
 }

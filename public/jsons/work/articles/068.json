@@ -1,0 +1,13 @@
+{
+  "id": 68,
+  "title": "할 일 체커",
+  "date": "2026",
+  "links": {
+    "github": "https://github.com/directorBae/super-simple-todo-checker",
+    "website": ""
+  },
+  "dataType": "markdown",
+  "category": "project",
+  "content": "# 할 일 체커\n\n팀과 프로젝트 단위로 할 일을 메모처럼 적고 관리하는 크로스 플랫폼 앱입니다. Windows 데스크톱, iOS·Android, 개인용 동기화 서버를 하나의 모노레포로 만들었습니다.\n\n## 세 개의 앱, 하나의 목록\n\n- 데스크톱: Electron + Vite + React. 트레이 상주, 알림, 구글 캘린더 연결\n- 모바일: Expo React Native (iOS / Android)\n- 서버: Node + SQLite. 기기 간 동기화와 Notion·Google·iCloud·OpenAI 연결\n\nPC와 휴대폰은 Supabase로 직접 동기화합니다. 같은 Wi-Fi가 필요 없고, 레코드마다 마지막 수정이 이기며 삭제도 함께 전파됩니다.\n\n## 할 일을 다루는 방식\n\n- 일/월 보기 전환, 팀·프로젝트 그룹 입력과 부분일치 자동완성\n- 여러 줄 붙여넣기, 날짜 미정 목록, 버킷, 프로젝트 진행률\n\n## 집중 공간\n\n- 팀·버킷, 메인, 시계 — 옆으로 넘기는 세 개의 유리 시트 방\n- 할 일을 원형 시계 위로 끌어다 놓으면 15분 단위로 시작 시간이 배정됩니다\n- 24×24 도트 펫이 방 사이를 돌아다니고, 할 일을 끝내면 반응합니다\n- YouTube 링크로 만드는 음악 목록, 인터넷이 끊기면 나타나는 펫 주인공 미니 게임(공룡 달리기·마리오·갤러그·팩맨)\n",
+  "edge": []
+}

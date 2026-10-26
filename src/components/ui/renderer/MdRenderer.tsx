@@ -18,6 +18,14 @@ const MarkdownRenderer: React.FC<Props> = ({ content }) => {
           a: ({ href, children }) => (
             <StarLink href={href || '#'}>{children}</StarLink>
           ),
+          // Spans, not <figure>: markdown puts images inside a <p>.
+          img: ({ src, alt }) => (
+            <span className="md-figure">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={typeof src === 'string' ? src : ''} alt={alt || ''} loading="lazy" />
+              {alt && <span className="md-caption">{alt}</span>}
+            </span>
+          ),
         }}
       >
         {content}

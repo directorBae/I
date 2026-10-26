@@ -1,13 +1,13 @@
 {
   "id": 64,
   "title": "port-forwarding.net",
-  "date": "",
+  "date": "2025.04",
   "links": {
     "github": "",
     "website": ""
   },
   "dataType": "markdown",
   "category": "project",
-  "content": "# port-forwarding.net\n\n내용을 준비하고 있습니다.",
+  "content": "# port-forwarding.net\n\n대학생들이 직접 강의자가 되는, 강의 중심의 네트워킹 세션입니다. \"전국을 잇는 청년 IT 네트워크\"를 내걸고, 사단법인 다움과 [JJeomNet](/work?id=57)이 함께 주관했습니다.\n\n2025년 4월 5일 판교 PDC A동 구름스퀘어에서 열렸습니다.\n\n![port-forwarding.net 참가자 단체 사진](/imgs/work/64-1.jpg)\n",
   "edge": []
 }

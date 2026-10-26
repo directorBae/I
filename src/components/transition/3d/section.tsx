@@ -17,6 +17,7 @@ import {
 import type { CubeScene } from './cube-scene';
 import styles from './section.module.css';
 import { GoldGrainCursor } from './GoldGrainCursor';
+import { MeteorNews } from '@/components/ui/home/MeteorNews';
 
 type Gesture = { id: number; x: number; y: number; start: CubeRotation };
 
@@ -220,7 +221,8 @@ export const D3Section = () => {
     }
   };
   const keyDown = (event: KeyboardEvent<HTMLDivElement>) => {
-    if (busy.current) return;
+    // Keys pressed on the news links belong to those links, not the cube.
+    if (busy.current || event.target !== event.currentTarget) return;
     if (event.key === 'Enter') {
       const face = resolveCubeFace(rotation.current);
       if (face) {
@@ -305,6 +307,7 @@ export const D3Section = () => {
           </div>
         </div>
       )}
+      <MeteorNews />
       <div
         ref={hint}
         className={styles.hint}

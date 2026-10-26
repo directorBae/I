@@ -1,13 +1,13 @@
 {
   "id": 43,
   "title": "Personal Website",
-  "date": "",
+  "date": "2025.01",
   "links": {
-    "github": "",
+    "github": "https://github.com/directorBae/I",
     "website": ""
   },
   "dataType": "markdown",
   "category": "project",
-  "content": "# Personal Website\n\n내용을 준비하고 있습니다.",
+  "content": "# Personal Website\n\n지금 보고 있는 이 웹사이트입니다. 창업 이야기(Business), 발자취(Journey), 만든 것들(Work)을 한곳에 담았고, 처음부터 혼자 개발하고 있습니다.\n\n## 큐브로 고르는 첫 화면\n\n홈에는 여섯 면 모두에 B, J, W가 양각된 큐브가 있습니다. three.js로 렌더링하며, 큐브 모델은 three.js 스크립트로 직접 생성했습니다. 드래그나 방향키로 큐브를 돌리면 정면을 향한 글자에 따라 Business·Journey·Work 중 한 곳으로 이동하고, 페이지마다 다른 색의 전환 애니메이션이 재생됩니다.\n\n- 마우스를 따라 금빛 알갱이가 흩날렸다가 서서히 사라지는 커서\n- 새로 만든 것은 큐브에서 뻗어 나오는 유성 꼬리의 \"NEW\" 카드로 알림\n- 3D 큐브를 불러오기 전이나 WebGL을 쓸 수 없을 때는 CSS 3D 큐브로, 동작 줄이기 설정에서는 짧은 전환으로 대체\n\n![BJW 큐브와 NEW 카드가 있는 홈 화면](/imgs/work/43-1.png)\n\n## 별자리로 엮은 Work\n\nWork 페이지는 프로젝트를 별로, 프로젝트 사이의 관계를 선으로 이은 별자리입니다. 행성 배경 위에 react-d3-graph(D3 force) 그래프를 올렸고, 별에 마우스를 올리거나 선택하면 이어진 별만 밝게 남고 나머지는 흐려집니다.\n\n![행성 위에 펼쳐진 Work 별자리](/imgs/work/43-2.png)\n\n별을 누르면 오른쪽 상세 패널에 Markdown으로 쓴 글이 열립니다. 글은 하나에 JSON 파일 하나로 관리하고, 글 안에서 다른 작업 링크를 누르면 해당 별로 바로 이동합니다.\n\n![별을 눌러 연 Work 상세 패널](/imgs/work/43-3.png)\n\n## 스택\n\n- Next.js 15(App Router), React 19, TypeScript, Tailwind CSS\n- three.js, react-d3-graph·D3, framer-motion, react-markdown\n- SEO: 페이지·글별 메타데이터와 Open Graph, sitemap.xml·robots.txt 자동 생성, JSON-LD 구조화 데이터\n- 모바일에서는 큐브와 별자리 대신 가벼운 전용 화면을 보여 줍니다\n",
   "edge": []
 }

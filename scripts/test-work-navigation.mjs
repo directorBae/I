@@ -8,7 +8,7 @@ import React from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
 const require = createRequire(import.meta.url);
 const rows = Object.fromEntries(
-  [1, 2, 3, 4, 5, 6, 7].map((id) => [
+  [1, 2, 3, 4, 36, 6, 7].map((id) => [
     String(id),
     JSON.parse(
       fs.readFileSync(
@@ -55,11 +55,11 @@ test('star links use the existing detail selection and preserve modified clicks'
       useGraphState: () => ({ clickNode: (id) => selected.push(id) }),
     },
   });
-  const link = StarLink({ href: '/work?id=5', children: 'LoL' });
+  const link = StarLink({ href: '/work?id=36', children: 'LoL' });
   let prevented = 0;
   link.props.onClick({ button: 0, preventDefault: () => prevented++ });
   assert.equal(prevented, 1);
-  assert.deepEqual(selected, ['5']);
+  assert.deepEqual(selected, ['36']);
   link.props.onClick({
     button: 0,
     ctrlKey: true,
@@ -101,9 +101,9 @@ test('detail-to-detail selection changes URL through native history without a ro
     { window },
   );
   const context = GraphStateProvider({ children: null }).props.value;
-  context.clickNode('5');
-  assert.equal(history[0], '/work?id=5');
-  assert(updates.some((x) => x.index === 0 && x.value === '5'));
+  context.clickNode('36');
+  assert.equal(history[0], '/work?id=36');
+  assert(updates.some((x) => x.index === 0 && x.value === '36'));
   context.clickNode('8');
   assert.equal(history.length, 1, 'removed Pando cannot be opened');
 });
@@ -132,7 +132,7 @@ test('changing project preserves the same animated panel identity', () => {
     './StarLink': { StarLink: empty },
   });
   const first = Article({ id: '4' }).props.children,
-    second = Article({ id: '5' }).props.children;
+    second = Article({ id: '36' }).props.children;
   assert.equal(first.key, second.key);
   assert.equal(first.type, second.type);
   assert.notEqual(first.props['aria-label'], second.props['aria-label']);

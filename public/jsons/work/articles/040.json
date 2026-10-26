@@ -1,13 +1,13 @@
 {
   "id": 40,
   "title": "GPTranslate",
-  "date": "",
+  "date": "2024.06",
   "links": {
-    "github": "",
-    "website": ""
+    "github": "https://github.com/directorBae/gptranslate",
+    "website": "https://gptranslate-mu.vercel.app"
   },
   "dataType": "markdown",
   "category": "project",
-  "content": "# GPTranslate\n\n내용을 준비하고 있습니다.",
+  "content": "# GPTranslate\n\n맥락과 전문 용어까지 살려 번역하는 GPT 기반 번역 웹입니다. 개인 프로젝트로 프런트엔드와 백엔드를 모두 혼자 만들었습니다.\n\n## 셀 단위 번역\n\nGPT에게 번역을 맡기고 싶어도 채팅 화면에서 한 문장씩 입력하기는 번거롭다는 데서 출발했습니다. 논문처럼 전문 용어가 많은 글이나, 슬랭과 맥락을 살려야 하는 문장을 번역하는 데 맞췄습니다.\n\n- 문장을 입력하면 번역 버튼이 나타나고, 한국어·영어·일본어·중국어·스페인어·프랑스어 중 하나를 고르면 셀 아래에 번역문이 표시됩니다.\n- 셀은 최대 20개까지 추가할 수 있어, 앞뒤 문장이나 다른 번역 결과를 한 화면에서 비교할 수 있습니다.\n- 셀을 잠그면 지워지거나 수정되지 않습니다.\n\n![여러 셀에 나눠 입력한 문장과 번역 결과](/imgs/work/40-1.png)\n\n![번역할 언어를 고르는 메뉴](/imgs/work/40-2.png)\n\n## 가볍게 만든 구조\n\n프런트엔드는 React와 MobX로 만들었고, 백엔드는 Python 함수 하나를 AWS Lambda에 올려 서버리스로 운영했습니다. 사용자가 자신의 OpenAI API 키를 등록하면 브라우저 쿠키에 저장되고, Lambda가 그 키로 GPT-4o를 호출해 번역문만 돌려줍니다. 키를 주고받는 과정에 AES-256 대칭키 암호화를 더하는 작업도 시작했습니다. Vercel에 배포한 뒤 검색 엔진 등록을 위한 SEO 설정까지 마쳤습니다.\n\n![OpenAI API 키를 등록하는 화면](/imgs/work/40-3.png)\n",
   "edge": []
 }

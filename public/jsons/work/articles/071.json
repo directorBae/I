@@ -1,0 +1,18 @@
+{
+  "id": 71,
+  "title": "LoL Banpick Predict Contest",
+  "date": "2024.03 ~ 2024.07",
+  "links": {
+    "github": "https://github.com/directorBae/lol-banpick-contest-demo",
+    "website": "https://lol-banpick-contest.vercel.app"
+  },
+  "dataType": "markdown",
+  "category": "project",
+  "content": "# LoL Banpick Predict Contest\n\n리그 오브 레전드 경기의 밴픽만 보고 어느 팀이 이길지 맞히는 예측 콘테스트 웹입니다. 프런트엔드를 혼자 개발했습니다. 2024년 3월 데모를 거쳐 7월까지 다듬었습니다.\n\n![LoL Banpick Predict Contest 첫 화면](/imgs/work/71-1.jpg)\n\n## 밴픽만 보고 승부 예측하기\n\n- 블루팀과 레드팀의 포지션별 챔피언 10장이 카드로 나오고, 카드를 클릭해 뒤집으면 그 플레이어의 모스트 픽·모스트 포지션·승률 같은 정보가 보입니다.\n- PC에서는 우클릭, 모바일에서는 길게 눌러 해당 플레이어의 최근 10경기 기록을 볼 수 있습니다. 처음 들어오면 조작법을 안내하는 가이드가 뜹니다.\n- 이길 팀을 고르면 점수와 라운드가 쌓이고, 결과 화면에서 최고 점수·현재 점수와 순위를 보여 줍니다. 홈에서는 최고·현재·전체 리더보드를 확인할 수 있습니다.\n- 아이디와 비밀번호로 가입하고, 라이엇 아이디는 선택으로 입력합니다.\n\n## 구현\n\nReact(Create React App)에 MobX로 페이지마다 View와 ViewModel을 나눴고, styled-components로 카드 뒤집기 애니메이션을, react-spring으로 가이드와 사이드 메뉴 전환을 만들었습니다. react-responsive로 데스크톱과 모바일 화면을 따로 구성했습니다. 로그인 토큰은 쿠키에 보관하고, axios 인터셉터로 만료된 토큰을 갱신합니다.\n\n배포 직전에는 SEO 메타 태그와 사이트맵을 넣고, 룸메이트에게 QA를 받아 UX를 고쳤습니다. 저장소에 남긴 Lighthouse 모바일 진단에서 성능 점수는 83에서 93으로 올랐고, 접근성과 SEO는 100점이었습니다. 상표권 문제를 우려해 타이틀을 \"League of Legends® BanPick Contest\"에서 \"LoL Banpick Predict Contest\"로 바꾸기도 했습니다.\n\n![모바일 첫 화면](/imgs/work/71-2.png)\n\n![Lighthouse 모바일 진단 결과](/imgs/work/71-3.png)\n",
+  "edge": [
+    {
+      "id": 10,
+      "content": "ari.ai 이름으로 낸 밴픽 예측 웹"
+    }
+  ]
+}

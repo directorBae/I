@@ -36,7 +36,7 @@ export function GoldGrainCursor({ active }: { active: boolean }) {
       frame = 0;
     let particles: Grain[] = [];
     let previous: { x: number; y: number; time: number } | null = null;
-    let budget = 45,
+    let budget = 140,
       lastSample = performance.now(),
       seed = 314159;
     const eligibleAt = performance.now() + 280;
@@ -83,7 +83,7 @@ export function GoldGrainCursor({ active }: { active: boolean }) {
       if (event.pointerType === 'touch' || document.hidden) return;
       const now = performance.now();
       if (now < eligibleAt) return;
-      budget = Math.min(45, budget + (now - lastSample) * 0.3);
+      budget = Math.min(140, budget + (now - lastSample) * 0.9);
       lastSample = now;
       const start =
         previous && now - previous.time < 120
@@ -94,14 +94,14 @@ export function GoldGrainCursor({ active }: { active: boolean }) {
         distance = Math.hypot(dx, dy);
       const count = Math.min(
         Math.floor(budget),
-        40,
-        Math.max(4, Math.ceil(distance * 1.3)),
+        110,
+        Math.max(10, Math.ceil(distance * 3.2)),
       );
       const tx = distance ? dx / distance : 1,
         ty = distance ? dy / distance : 0;
       for (let i = 0; i < count; i++) {
         const t = random(),
-          spread = (random() + random() + random() - 1.5) * 17;
+          spread = (random() + random() + random() - 1.5) * 22;
         particles.push({
           x: start.x + dx * t - ty * spread + tx * (random() - 0.5) * 5,
           y: start.y + dy * t + tx * spread + ty * (random() - 0.5) * 5,

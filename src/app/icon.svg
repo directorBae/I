@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <rect width="64" height="64" rx="14" fill="#101010"/>
+  <g transform="translate(32 33.5) scale(1.16) translate(-32 -32)">
+  <polygon points="32,12 49.3,22 32,32 14.7,22" fill="#fafafa"/>
+  <polygon points="14.7,22 32,32 32,52 14.7,42" fill="#cfcfcf"/>
+  <polygon points="32,32 49.3,22 49.3,42 32,52" fill="#8f8f8f"/>
+  <g font-family="'Arial Black', Arial, sans-serif" font-weight="900" fill="#101010" text-anchor="middle">
+    <text transform="matrix(17.3,10,0,20,14.7,22)" x="0.5" y="0.8" font-size="0.78">B</text>
+    <text transform="matrix(17.3,-10,0,20,32,32)" x="0.5" y="0.8" font-size="0.78">W</text>
+    <text transform="matrix(17.3,-10,17.3,10,14.7,22)" x="0.5" y="0.8" font-size="0.78">J</text>
+  </g>
+  </g>
+  <path d="M53 6.5 54.2 9.8 57.5 11 54.2 12.2 53 15.5 51.8 12.2 48.5 11 51.8 9.8Z" fill="#d0b077"/>
+</svg>

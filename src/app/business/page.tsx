@@ -8,11 +8,14 @@ import { BusinessBackCard } from './components/backCard';
 import Image from 'next/image';
 import ArrowLeft from '@public/svgs/arrowleft.svg';
 import Link from 'next/link';
+import { shareMetadata } from '@/lib/site';
+
+const description =
+  '배정원, 그리고 창업에 대한 이야기   The story of Bae Jeongwon and entrepreneurship';
 
 export const metadata = {
-  title: "배정원 - Business / Bae Jeongwon's Business",
-  description:
-    '배정원, 그리고 창업에 대한 이야기   The story of Bae Jeongwon and entrepreneurship',
+  title: { absolute: "배정원 - Business / Bae Jeongwon's Business" },
+  description,
   keywords: [
     '배정원',
     '창업',
@@ -25,47 +28,7 @@ export const metadata = {
     'Jeongwon',
     'Bae Jeongwon',
   ],
-  authors: [
-    {
-      name: 'Jeongwon Bae',
-      // url: "https://yourwebsite.com"
-    },
-  ],
-  openGraph: {
-    title: "배정원 - Business / Bae Jeongwon's Business",
-    description:
-      '배정원, 그리고 창업에 대한 이야기   The story of Bae Jeongwon and entrepreneurship',
-    url: 'https://yourwebsite.com/business', // 페이지 URL
-    siteName: '배정원', // 사이트 이름
-    images: [
-      {
-        url: '/path-to-your-image.jpg', // 대표 이미지 경로
-        width: 1200, // 이미지 너비
-        height: 630, // 이미지 높이
-        alt: '배정원 - 창업 이야기', // 이미지 설명
-      },
-    ],
-    locale: 'ko_KR', // 페이지 언어 및 지역
-    type: 'website',
-  },
-  twitter: {
-    card: 'summary_large_image', // Twitter 카드 타입
-    title: "배정원 - Business / Bae Jeongwon's Business",
-    description:
-      '배정원, 그리고 창업에 대한 이야기   The story of Bae Jeongwon and entrepreneurship',
-    images: ['/path-to-your-image.jpg'],
-  },
-  alternates: {
-    canonical: 'https://yourwebsite.com/business', // 정규 URL
-    languages: {
-      'ko-KR': 'https://yourwebsite.com/ko/business',
-    },
-  },
-  robots: {
-    index: true,
-    follow: true,
-    nocache: false,
-  },
+  ...shareMetadata("배정원 - Business / Bae Jeongwon's Business", description, '/business'),
 };
 
 export default function BusinessPage() {

@@ -1,13 +1,13 @@
 {
   "id": 39,
   "title": "GLPT 서비스 풀스택 개발 - mlapi",
-  "date": "",
+  "date": "2025.03",
   "links": {
     "github": "",
     "website": ""
   },
   "dataType": "markdown",
   "category": "project",
-  "content": "# GLPT 서비스 풀스택 개발 - mlapi\n\n내용을 준비하고 있습니다.",
+  "content": "# GLPT 서비스 풀스택 개발 - mlapi\n\n[GLPT](/work?id=36) 모델을 서비스에 연결하는 추론 API 서버입니다. Python·Flask로 만들었고, 세 명이 함께 작업했습니다. 서버의 뼈대와 Redis 연동을 맡았고, 모델·추론 코드는 팀원들이 작성했습니다.\n\n## 맡은 부분\n\n- **서버 구조**: Flask Blueprint로 `/api/predict`(승률 예측)와 `/api/recommend`(챔피언 추천) 라우트를 나누고, 요청을 처리하는 컨트롤러와 유틸리티의 구조를 잡았습니다. 서버 상태를 확인하는 `/status` 엔드포인트도 두었습니다.\n- **Redis 연동**: Redis 연결 객체와 조회·저장·삭제를 감싼 컨트롤러, 연결·명령·데이터 오류를 구분한 예외 클래스를 만들었습니다.\n- **통합**: 팀원들의 브랜치를 합쳐 앱이 실제로 구동되도록 맞췄습니다.\n\n## KV 캐시를 Redis에\n\n밴픽은 한 턴씩 진행되기 때문에, 앞선 턴의 어텐션 key·value를 다시 계산하지 않아도 됩니다. 밴픽 기록마다 모델 입력과 KV 캐시를 Redis에 저장해 다음 턴 추론에 재사용하는 구조를 팀원들과 설계했습니다. 승률 모델과 챔피언 모델은 서로 다른 GPU에 올려 float16으로 추론합니다.\n\n추론 시간 개선 결과는 [GLPT 서비스](/work?id=36)에서 다룹니다.\n",
   "edge": []
 }

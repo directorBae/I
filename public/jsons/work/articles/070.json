@@ -1,0 +1,18 @@
+{
+  "id": 70,
+  "title": "WebQuestion",
+  "date": "2026.09",
+  "links": {
+    "github": "https://github.com/Black-Coconut/webquestion",
+    "website": ""
+  },
+  "dataType": "markdown",
+  "category": "project",
+  "content": "# WebQuestion\n\n사용자가 행동을 마친 바로 그 순간, 방금 클릭한 자리 옆에 질문 하나를 띄우는 웹용 마이크로서베이 플랫폼입니다. [BlackCoconut](/work?id=56)에서 SDK·서버·대시보드를 만들어 pre-release 0.1로 공개했습니다.\n\n설문 링크를 메일로 돌리거나 여러 페이지짜리 폼으로 흐름을 끊는 대신, 질문 하나와 최대 10개의 답을 한 번의 클릭으로 받는 것이 목표입니다. 대시보드에서 질문을 만들고, 사이트에 스크립트 한 줄을 넣은 뒤, 원하는 시점에 `wq.trigger(\"export_completed\")`처럼 이벤트를 호출하면 됩니다.\n\n![README의 동작 방식과 기능 소개](/imgs/work/70-1.png)\n\n## 세 부분으로 나눈 구조\n\n- **SDK** (`@webquestion/sdk`, npm 공개): TypeScript와 tsup으로 바닐라 코어·React 훅·스크립트 태그용 위젯을 함께 빌드합니다. 위젯은 약 12KB, 의존성 없이 Shadow DOM으로 그려 사이트 CSS와 충돌하지 않고, SSR 환경에서는 아무 일도 하지 않습니다.\n- **서버**: Flask API가 인증, 서베이 CRUD, SDK용 공개 API, 위젯 스크립트 서빙을 맡고 MongoDB에 저장합니다. 공개 API에는 IP 단위 레이트 리밋을 걸었습니다.\n- **대시보드**: Next.js(TypeScript)로 서베이 빌더, 설치 코드, 응답 분석 화면을 만들었습니다.\n\n## 질문 하나를 위한 세부\n\n- 마지막 클릭 좌표를 기억해 그 근처에 팝업을 띄우고, 화면 밖으로 나가지 않게 위치를 맞춥니다.\n- 노출 빈도를 사용자당 1회·세션당 1회·N일마다로 정할 수 있고, '본 것'과 '답한 것'을 구분해 이미 답한 사용자에게는 다시 묻지 않고, 닫기만 한 사용자에게는 다음 세션에 다시 보여 줍니다.\n- 노출과 응답을 따로 기록해 응답률을 계산하고, 응답마다 URL·시각·언어·뷰포트·커스텀 컨텍스트를 함께 남깁니다.\n- 영어·중국어·일본어·스페인어 번역을 자동 번역으로 채우고, 브라우저 언어에 맞춰 보여 줍니다.\n- Cursor나 Claude Code에 붙여 넣으면 SDK 설치부터 트리거 연결까지 해 주는 설치용 프롬프트를 대시보드에서 제공합니다.\n",
+  "edge": [
+    {
+      "id": 56,
+      "content": "BlackCoconut에서 공개한 제품"
+    }
+  ]
+}

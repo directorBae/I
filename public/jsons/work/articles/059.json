@@ -1,13 +1,13 @@
 {
   "id": 59,
   "title": "IT 아레나",
-  "date": "",
+  "date": "2025.10",
   "links": {
     "github": "",
     "website": ""
   },
   "dataType": "markdown",
   "category": "project",
-  "content": "# IT 아레나\n\n과기원 연합 IT 페스티벌입니다. [JJeomNet](/work?id=57)에서 기획하고 개최했고, 200명 이상이 참여했습니다.",
+  "content": "# IT 아레나\n\n과기원 연합 IT 페스티벌입니다. [JJeomNet](/work?id=57)에서 기획하고 개최했고, 200명 이상이 참여했습니다.\n\n\"2025 IST-TECH IT ARENA\"라는 이름으로, 6개 과학기술특성화대학 학생들이 함께한 IT 교류회였습니다. 로봇·AI·게임·알고리즘 등 6개 IT 분야를 아우릅니다.\n\n![2025 IST-TECH IT ARENA 단체 사진](/imgs/work/59-1.jpg)\n",
   "edge": []
 }

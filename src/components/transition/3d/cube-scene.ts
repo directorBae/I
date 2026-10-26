@@ -128,6 +128,11 @@ export async function createCubeScene(
       if (!flight)
         cubePixels = Math.min(560, Math.min(rect.width, rect.height) * 0.9);
       baseScale = (cubePixels * 6) / (rect.height * 3.0);
+      // Lets the page lay things out around the cube's real on-screen size.
+      host.parentElement?.style.setProperty(
+        '--cube-face',
+        `${(baseScale * 1.4 * (rect.height / 6)).toFixed(1)}px`,
+      );
       renderer.setSize(rect.width, rect.height);
     };
     const observer = new ResizeObserver(resize);

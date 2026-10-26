@@ -3,11 +3,11 @@
   "title": "HOT ITssue",
   "date": "2023.08",
   "links": {
-    "github": "",
+    "github": "https://github.com/directorBae/HotITssue",
     "website": ""
   },
   "dataType": "markdown",
   "category": "project",
-  "content": "# HOT ITssue\n\n차세대 IT 토픽 뉴스를 제공하는 플랫폼입니다.\n\n기획, 아키텍처 설계, DB 구축, 알고리즘 설계와 최종 발표를 맡았고, [제8회 부산ICT융합해커톤대회](/work?id=26)에서 대상(동서대학교 SW중심대학단장상)을 받았습니다.",
+  "content": "# HOT ITssue\n\n차세대 IT 토픽 뉴스를 제공하는 플랫폼입니다.\n\n기획, 아키텍처 설계, DB 구축, 알고리즘 설계와 최종 발표를 맡았고, [제8회 부산ICT융합해커톤대회](/work?id=26)에서 대상(동서대학교 SW중심대학단장상)을 받았습니다. [팀 허니브레드](/work?id=21) 팀원들과 함께 만들었습니다.\n\n## 키워드마다 기사 한 편\n\nGPT-4, Midjourney, Apple Vision Pro 같은 IT 키워드 46개를 골라, 키워드마다 대표 기사의 제목·본문·요약과 임베딩을 묶어 데이터셋을 만들었습니다. 각 키워드에는 화제성 점수와 HOT 지수를 붙였습니다.\n\n- 사용자가 관심사를 문장으로 입력하면 OpenAI 임베딩의 코사인 유사도로 상위 20% 기사를 추리고, GPT가 그중 가장 맞는 기사 하나를 고릅니다.\n- HOT 지수로 키워드 워드클라우드를 그리고, Google Cloud Vision OCR로 그림 속 각 단어의 위치를 읽어 냅니다.\n- 글자 크기는 키워드 사이의 관련도 25%, 화제성 50%, HOT 지수 25%를 섞어 정하도록 설계했습니다.\n\n![HOT 지수로 그린 IT 키워드 워드클라우드 테스트 결과](/imgs/work/27-1.png)\n\n## 프로토타입의 범위\n\n해커톤에서 만든 프로토타입이라 실시간 모니터링은 구현하지 않았습니다. 저장소에는 제가 맡은 AI 아키텍처와 로직 처리 모듈이 남아 있습니다.\n",
   "edge": []
 }

@@ -1,5 +1,5 @@
 export const SITE_URL = (
-  process.env.NEXT_PUBLIC_SITE_URL || 'https://baejeongwon.com'
+  process.env.NEXT_PUBLIC_SITE_URL || 'https://www.baejeongwon.com'
 ).replace(/\/$/, '');
 
 export const SITE_NAME = '배정원 · Bae Jeongwon';

@@ -1,0 +1,22 @@
+{
+  "id": 9,
+  "title": "URANUS",
+  "date": "2025.05",
+  "links": {
+    "github": "",
+    "website": ""
+  },
+  "dataType": "markdown",
+  "category": "company",
+  "content": "# URANUS\n\n드론쇼 솔루션 스타트업 URANUS에서 리드 소프트웨어 엔지니어로 일하고 있습니다. 드론 LED 제어 소프트웨어와 임베디드 개발을 맡고 있습니다.\n\n## 맡은 일\n\n- 30대 이상 드론의 디스플레이를 10μs 이내의 정확도로 동시에 트리거하고 전환하는 제어 로직 구현 — [드론 LED 동시 제어](/work?id=2)\n- 기체의 진동과 충격을 고려한 I2C 통신 회로 설계\n- 드론쇼용 3D 포인트와 전환 경로 생성 — [드론쇼 3D 경로 생성](/work?id=3)",
+  "edge": [
+    {
+      "id": 2,
+      "content": "URANUS의 드론 LED 제어"
+    },
+    {
+      "id": 3,
+      "content": "URANUS의 드론쇼 경로 생성"
+    }
+  ]
+}

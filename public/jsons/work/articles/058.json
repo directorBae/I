@@ -1,0 +1,13 @@
+{
+  "id": 58,
+  "title": "리얼톤",
+  "date": "",
+  "links": {
+    "github": "",
+    "website": ""
+  },
+  "dataType": "markdown",
+  "category": "project",
+  "content": "# 리얼톤\n\n유저의 실제 반응을 듣는 데모데이 결합 해커톤입니다. [JJeomNet](/work?id=57)에서 기획하고 개최했습니다.\n\n- 100명 이상 참여\n- 국회의원상, 울산시의회상 수여",
+  "edge": []
+}

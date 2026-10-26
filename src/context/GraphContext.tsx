@@ -1,13 +1,18 @@
-// GraphStateContext.tsx
-'use client';
+﻿'use client';
 
-import { createContext, useContext, useState, useEffect } from 'react';
-import { useRouter, useSearchParams } from 'next/navigation';
+import {
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  useCallback,
+} from 'react';
+import type { ReactNode } from 'react';
+import { useSearchParams } from 'next/navigation';
 import Graph from '@/model/graph';
-import { ContentType } from '@/types/types';
+import type { ContentType } from '@/types/types';
 
-import { ReactNode } from 'react';
-
+type NearbyNode = { id: string; title: string; date: string };
 interface GraphStateContextType {
   selectedNode: string | null;
   setSelectedNode: (node: string | null) => void;
@@ -15,100 +20,109 @@ interface GraphStateContextType {
   setHoveredNode: (node: string | null) => void;
   isShowSide: boolean;
   setIsShowSide: (show: boolean) => void;
-  hoverData: { id: string; title: string; date: string } | null;
-  setHoverData: (
-    data: { id: string; title: string; date: string } | null,
-  ) => void;
+  hoverData: NearbyNode | null;
+  setHoverData: (data: NearbyNode | null) => void;
   graphData: any | null;
-  contentsData: { [key: string]: ContentType } | null;
+  contentsData: Record<string, ContentType> | null;
   clickNode: (nodeId: string) => void;
+  closeProject: () => void;
   parseNearbyNodes: (nodeId: string) => string[];
-  parseNearbyNodesWithTitle: (nodeId: string) => {
-    id: string;
-    title: string;
-    date: string;
-  }[];
+  parseNearbyNodesWithTitle: (nodeId: string) => NearbyNode[];
 }
-
 export const GraphStateContext = createContext<GraphStateContextType | null>(
   null,
 );
-
 export const GraphStateProvider = ({ children }: { children: ReactNode }) => {
-  const [selectedNode, setSelectedNode] = useState<string | null>(null);
-  const [hoveredNode, setHoveredNode] = useState<string | null>(null);
-  const [isShowSide, setIsShowSide] = useState<boolean>(false);
-  const [hoverData, setHoverData] = useState<{
-    id: string;
-    title: string;
-    date: string;
-  } | null>(null);
-  const [graphData, setGraphData] = useState<any | null>(null);
-  const [contentsData, setContentsData] = useState<{
-    [key: string]: ContentType;
-  } | null>(null);
-
-  const router = useRouter();
   const searchParams = useSearchParams();
-
-  const convertContentsData = (data: ContentType[]) => {
-    return data.reduce((acc: { [key: string]: ContentType }, cur) => {
-      acc[cur.id] = cur;
-      return acc;
-    }, {});
-  };
+  const queryId = searchParams.get('id');
+  const [selectedNode, setSelectedNode] = useState<string | null>(queryId);
+  const [hoveredNode, setHoveredNode] = useState<string | null>(null);
+  const [isShowSide, setIsShowSide] = useState(false);
+  const [hoverData, setHoverData] = useState<NearbyNode | null>(null);
+  const [graphData, setGraphData] = useState<any | null>(null);
+  const [contentsData, setContentsData] = useState<Record<
+    string,
+    ContentType
+  > | null>(null);
 
   useEffect(() => {
-    fetch('/api/json')
-      .then((res) => res.json())
-      .then((data) => {
-        setContentsData(convertContentsData(data));
-        const graphData = new Graph(data).graphData;
-        setGraphData(graphData);
-        console.log(graphData);
+    setSelectedNode(queryId);
+  }, [queryId]);
+  useEffect(() => {
+    const controller = new AbortController();
+    fetch('/api/json', { signal: controller.signal })
+      .then((res) => {
+        if (!res.ok) throw new Error('Work data unavailable');
+        return res.json();
+      })
+      .then((data: ContentType[]) => {
+        setContentsData(
+          Object.fromEntries(data.map((item) => [String(item.id), item])),
+        );
+        setGraphData(new Graph(data).graphData);
+      })
+      .catch((error) => {
+        if (error.name !== 'AbortError') {
+          setContentsData({});
+          setGraphData({ nodes: [], links: [] });
+        }
       });
+    return () => controller.abort();
   }, []);
+  useEffect(() => {
+    if (contentsData && queryId && !contentsData[queryId]) {
+      setSelectedNode(null);
+      window.history.replaceState(null, '', '/work');
+    }
+  }, [contentsData, queryId]);
 
-  const clickNode = (nodeId: string) => {
-    setSelectedNode(nodeId);
-    setIsShowSide(false);
-    router.push(`/work?id=${nodeId}`);
-  };
-
-  const parseNearbyNodes = (nodeId: string) => {
-    if (!graphData) return [];
-    const nearbyNodes: string[] = graphData.links
-      .filter((link: { source: string; target: string }) => {
-        return link.source === nodeId || link.target === nodeId;
-      })
-      .map((link: { source: string; target: string }) => {
-        return link.source === nodeId ? link.target : link.source;
-      });
-    nearbyNodes.push(nodeId);
-
-    return Array.from(new Set(nearbyNodes) || []);
-  };
-
-  const parseNearbyNodesWithTitle = (nodeId: string) => {
-    if (!graphData) return [];
-    const nearbyNodes = parseNearbyNodes(nodeId);
-    return nearbyNodes
-      .map((node) => {
-        if (!contentsData) return undefined;
-        // 본인 제외
-        if (node === nodeId) return undefined;
-        return {
-          id: node,
-          title: contentsData[node].title,
-          date: contentsData[node].date,
-        };
-      })
-      .filter((node) => node !== undefined) as {
-      id: string;
-      title: string;
-      date: string;
-    }[];
-  };
+  const clickNode = useCallback(
+    (nodeId: string) => {
+      if (!contentsData?.[nodeId]) return;
+      setSelectedNode(nodeId);
+      setIsShowSide(false);
+      setHoveredNode(null);
+      // Native history keeps the planet, graph and open article mounted.
+      // Next's patched history also updates useSearchParams and Back/Forward.
+      const href = `/work?id=${encodeURIComponent(nodeId)}`;
+      if (window.location.pathname + window.location.search !== href)
+        window.history.pushState(null, '', href);
+    },
+    [contentsData],
+  );
+  const closeProject = useCallback(() => {
+    setSelectedNode(null);
+    setIsShowSide(true);
+    window.history.pushState(null, '', '/work');
+  }, []);
+  const parseNearbyNodes = useCallback(
+    (nodeId: string) => {
+      if (!graphData) return [];
+      const idOf = (value: any) =>
+        typeof value === 'object' ? String(value.id) : String(value);
+      const nearby: string[] = graphData.links
+        .filter(
+          (edge: any) =>
+            idOf(edge.source) === nodeId || idOf(edge.target) === nodeId,
+        )
+        .map((edge: any) =>
+          idOf(edge.source) === nodeId ? idOf(edge.target) : idOf(edge.source),
+        );
+      return Array.from(new Set([...nearby, nodeId]));
+    },
+    [graphData],
+  );
+  const parseNearbyNodesWithTitle = useCallback(
+    (nodeId: string) =>
+      parseNearbyNodes(nodeId)
+        .filter((id) => id !== nodeId && !!contentsData?.[id])
+        .map((id) => ({
+          id,
+          title: contentsData![id].title,
+          date: contentsData![id].date,
+        })),
+    [parseNearbyNodes, contentsData],
+  );
 
   return (
     <GraphStateContext.Provider
@@ -124,6 +138,7 @@ export const GraphStateProvider = ({ children }: { children: ReactNode }) => {
         graphData,
         contentsData,
         clickNode,
+        closeProject,
         parseNearbyNodes,
         parseNearbyNodesWithTitle,
       }}
@@ -132,11 +147,8 @@ export const GraphStateProvider = ({ children }: { children: ReactNode }) => {
     </GraphStateContext.Provider>
   );
 };
-
 export const useGraphState = () => {
   const state = useContext(GraphStateContext);
-  if (!state) {
-    throw new Error('Cannot find GraphStateProvider');
-  }
+  if (!state) throw new Error('Cannot find GraphStateProvider');
   return state;
 };

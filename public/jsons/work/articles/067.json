@@ -1,0 +1,13 @@
+{
+  "id": 67,
+  "title": "포트홀 감지 시스템",
+  "date": "2019",
+  "links": {
+    "github": "",
+    "website": ""
+  },
+  "dataType": "markdown",
+  "category": "project",
+  "content": "# 포트홀 감지 시스템\n\nArduino 센서로 도로의 포트홀을 감지하고, Oracle DB로 모아 처리하는 시스템입니다.\n\n- Oracle DB와 Arduino 센싱을 활용한 포트홀 감지 시스템 개발\n- Oracle DB 우선순위 큐 처리 알고리즘 구현\n\n[부산과학전람회](/work?id=66)에서 우수상을 받았습니다.",
+  "edge": []
+}

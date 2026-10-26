@@ -1,0 +1,13 @@
+{
+  "id": 5,
+  "title": "LoL 밴픽 전략 분석·추천",
+  "date": "",
+  "links": {
+    "github": "",
+    "website": ""
+  },
+  "dataType": "markdown",
+  "category": "project",
+  "content": "# LoL 밴픽 전략 분석·추천\n\ne스포츠 구단을 위한 전략 분석·추천 서비스입니다. 서비스의 기획과 UI/UX, 풀스택 개발, AI 추론 서버와 배포를 연결했습니다.\n\n## 40초의 응답을 3초로\n\n실제 호스팅 환경에서 추론에 40초가 소요되는 문제를 KV caching과 Redis로 최적화했습니다. 추론 시간을 3초로 줄여 10배 이상 속도를 개선했습니다.\n\n## 하나의 제품으로 연결하다\n\n팀원들과 기획을 리딩하고 Figma로 UI/UX를 설계했습니다. 프론트엔드·백엔드와 AI 추론 서버를 개발하고, 네트워크 터널링을 활용해 Client–Server–GPU Server 아키텍처를 구성했습니다. GitHub Actions와 AWS로 배포·호스팅을 연결했습니다.\n\nARI.AI AI플랫폼팀 팀장으로 수행한 작업입니다. 관련된 데이터 처리 과정은 [게임 데이터 MLOps](/work?id=4)에서 다룹니다.",
+  "edge": []
+}

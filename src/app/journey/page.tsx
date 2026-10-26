@@ -99,10 +99,13 @@ export default function JourneyPage() {
         </div>
       </div>
       <Picture imageSrc={MongdolPic} back={<JourneyBackCard />} />
-      <Context
-        title={JourneyData.context1.title}
-        description={JourneyData.context1.context}
-      />
+      {JourneyData.contexts.map((section) => (
+        <Context
+          key={section.title}
+          title={section.title}
+          description={section.context}
+        />
+      ))}
     </main>
   );
 }

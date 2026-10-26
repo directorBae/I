@@ -1,0 +1,18 @@
+{
+  "id": 31,
+  "title": "전국 창의재단 R&E",
+  "date": "2019.12",
+  "links": {
+    "github": "",
+    "website": ""
+  },
+  "dataType": "markdown",
+  "category": "award",
+  "content": "# 전국 창의재단 R&E\n\n창의재단이 주최한 전국 과학영재 R&E에서 장려상(미래창조과학부 장관상)을 받았습니다.\n\nCAPTCHA를 직접 만들고 CNN·GAN으로 분석한 [캡챠 이미지 분석·개선 연구](/work?id=32)입니다.",
+  "edge": [
+    {
+      "id": 32,
+      "content": "R&E 장려상 수상 연구"
+    }
+  ]
+}

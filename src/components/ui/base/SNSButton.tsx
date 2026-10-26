@@ -21,7 +21,7 @@ export const SNSButton = () => {
           alt="linkedin"
         />
       </Link>
-      <Link href="https://www.instagram.com/love__loper/" target="_blank">
+      <Link href="https://www.instagram.com/garden_chirung/" target="_blank">
         <Image
           src={InstagramIcon}
           className="w-4 h-4 lg:w-8 lg:h-8"

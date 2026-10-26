@@ -1,0 +1,39 @@
+'use client';
+
+import Link from 'next/link';
+import { useGraphState } from '@/context/GraphContext';
+import GraphComponent from '@/components/ui/graphs/visualizeGraphs';
+import { Title } from '@/components/ui/base/Title';
+import { Article } from './article';
+import { HoverArticle } from './hover';
+import styles from './work.module.css';
+
+export function WorkScene() {
+  const { selectedNode } = useGraphState();
+  const detail = !!selectedNode;
+  return (
+    <main className={styles.scene} data-detail={detail}>
+      <div className={styles.space} aria-hidden="true" />
+      {!detail && (
+        <Link href="/" className={styles.overviewTitle} aria-label="홈으로">
+          <Title text="Work" />
+        </Link>
+      )}
+      <section className={styles.world} aria-label="프로젝트 별자리">
+        <div className={styles.planet} aria-hidden="true" />
+        <div className={styles.shade} aria-hidden="true" />
+        <div className={styles.graphMount}>
+          <GraphComponent compact={detail} />
+        </div>
+      </section>
+      <Article id={selectedNode} />
+      {!detail && <HoverArticle />}
+      <Link href="/" className={styles.home} aria-label="홈으로">
+        <svg viewBox="0 0 180 132" fill="currentColor" aria-hidden="true">
+          <path d="M171.818 73.6366H24.5453C19.9635 73.6366 16.3635 70.0366 16.3635 65.4548C16.3635 60.8729 19.9635 57.2729 24.5453 57.2729H171.818C176.4 57.2729 180 60.8729 180 65.4548C180 70.0366 176.4 73.6366 171.818 73.6366Z" />
+          <path d="M65.4545 130.909C64.3815 130.922 63.3176 130.711 62.3312 130.288C61.3448 129.865 60.4578 129.241 59.7273 128.455L2.45455 71.1818C-0.818182 67.9091 -0.818182 62.8364 2.45455 59.5636L59.7273 2.45455C63 -0.818182 68.0727 -0.818182 71.3455 2.45455C74.6182 5.72727 74.6182 10.8 71.3455 14.0727L19.8 65.6182L71.3455 117.164C74.6182 120.436 74.6182 125.509 71.3455 128.782C69.7091 130.418 67.5818 131.236 65.6182 131.236L65.4545 130.909Z" />
+        </svg>
+      </Link>
+    </main>
+  );
+}

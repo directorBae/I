@@ -1,0 +1,18 @@
+{
+  "id": 56,
+  "title": "BlackCoconut",
+  "date": "2026.03",
+  "links": {
+    "github": "",
+    "website": ""
+  },
+  "dataType": "markdown",
+  "category": "company",
+  "content": "# BlackCoconut\n\nBlackCoconut의 CEO로 오디오와 AI 제품을 기획하고 개발하고 있습니다.\n\n## 맡은 일\n\n- 대화를 통해 믹싱 초기 세팅을 잡을 수 있는 오디오 믹싱 AI 어시스턴트 개발\n- AI 생성 음악의 RVQ 잔여 아티팩트를 제거하는 오디오 플러그인 기획·개발 — [Honenuki](/work?id=1)\n- 오디오 플러그인 개발과 세일즈로 3일 안에 사용 고객 5명 확보, 고객 인터뷰와 제품 개선을 이어가는 중",
+  "edge": [
+    {
+      "id": 1,
+      "content": "BlackCoconut의 오디오 플러그인"
+    }
+  ]
+}

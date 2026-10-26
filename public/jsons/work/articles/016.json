@@ -1,0 +1,13 @@
+{
+  "id": 16,
+  "title": "IMILab",
+  "date": "2023.11 ~ 2024.03",
+  "links": {
+    "github": "",
+    "website": ""
+  },
+  "dataType": "markdown",
+  "category": "academic",
+  "content": "# IMILab\n\nUNIST Interactive Machine Intelligence Lab에서 연구 인턴으로 참여했습니다.\n\n## push-block 연구\n\n- Unity 게임 환경에서 에이전트들이 협력해 블록을 미는 강화학습 정책 연구\n- TWM(Transformer World Model)을 활용한 Imagination 연구",
+  "edge": []
+}

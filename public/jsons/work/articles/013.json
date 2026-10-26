@@ -1,0 +1,18 @@
+{
+  "id": 13,
+  "title": "Travel-koBERT",
+  "date": "",
+  "links": {
+    "github": "",
+    "website": ""
+  },
+  "dataType": "markdown",
+  "category": "project",
+  "content": "# Travel-koBERT\n\n트립빌더 R&D팀에서 만든 여행 도메인 koBERT 모델입니다.\n\n## 데이터에서 모델까지\n\n장소에 대한 네이버 블로그 소셜 데이터를 수집하고, 토큰화한 뒤 koBERT로 전이학습했습니다. 수집부터 학습까지 전체 파이프라인을 직접 구축했고, 사내 travel_koBERT의 정확도를 92% 이상으로 끌어올렸습니다.\n\n이 모델은 [왔어울산](/work?id=6)의 여행지 추천에 쓰였습니다.",
+  "edge": [
+    {
+      "id": 6,
+      "content": "왔어울산 추천에 쓰인 koBERT"
+    }
+  ]
+}

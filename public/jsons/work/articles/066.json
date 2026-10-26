@@ -1,0 +1,18 @@
+{
+  "id": 66,
+  "title": "부산과학전람회",
+  "date": "2019.03 ~ 2019.05",
+  "links": {
+    "github": "",
+    "website": ""
+  },
+  "dataType": "markdown",
+  "category": "award",
+  "content": "# 부산과학전람회\n\n부산과학전람회에서 우수상을 받았습니다. Oracle DB와 Arduino 센싱을 활용한 [포트홀 감지 시스템](/work?id=67)을 만들었습니다.",
+  "edge": [
+    {
+      "id": 67,
+      "content": "부산과학전람회 우수상 수상작"
+    }
+  ]
+}

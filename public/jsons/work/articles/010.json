@@ -1,0 +1,38 @@
+{
+  "id": 10,
+  "title": "아리닷에이아이",
+  "date": "2024.05 ~ 2025.05",
+  "links": {
+    "github": "",
+    "website": ""
+  },
+  "dataType": "markdown",
+  "category": "company",
+  "content": "# 아리닷에이아이\n\ne스포츠 구단을 위한 LoL 전략 솔루션 스타트업 ARI.AI에서 AI플랫폼팀 팀장으로 일했습니다.\n\n## 맡은 일\n\n- 리그 오브 레전드 밴픽 전략 분석·추천 서비스의 풀스택 개발 — [LoL 밴픽 전략 분석·추천](/work?id=5)\n- 팀원들과 서비스 기획을 리딩하고 Figma로 UI/UX 설계, 프론트엔드·백엔드 개발, GitHub Actions와 AWS로 배포\n- AI 추론 서버를 개발·배포하고, 네트워크 터널링으로 Client–Server–GPU Server 서비스 아키텍처 구축\n- 게임 데이터 수집과 자동 개선을 잇는 파이프라인 — [게임 데이터 MLOps](/work?id=4)",
+  "edge": [
+    {
+      "id": 4,
+      "content": "ARI.AI의 데이터 파이프라인"
+    },
+    {
+      "id": 5,
+      "content": "ARI.AI의 밴픽 전략 서비스"
+    },
+    {
+      "id": 36,
+      "content": "ARI.AI의 GLPT 서비스"
+    },
+    {
+      "id": 42,
+      "content": "ARI.AI의 LLMOps"
+    },
+    {
+      "id": 41,
+      "content": "ARI.AI의 GPU 서버 운영"
+    },
+    {
+      "id": 48,
+      "content": "ARI.AI의 서버 관리"
+    }
+  ]
+}

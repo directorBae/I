@@ -1,0 +1,13 @@
+{
+  "id": 30,
+  "title": "UNIST AICP",
+  "date": "2022.12",
+  "links": {
+    "github": "",
+    "website": ""
+  },
+  "dataType": "markdown",
+  "category": "award",
+  "content": "# UNIST AICP\n\nUNIST AICP에서 입상했습니다. 알고리즘과 데이터를 총괄했습니다.\n\n- 자연어 클러스터링 알고리즘 고도화\n- BERT Fine-tuning 및 자연어 데이터 수집·처리 설계",
+  "edge": []
+}

@@ -1,155 +1,93 @@
-'use client';
+﻿'use client';
 
 import { Graph } from 'react-d3-graph';
 import { useGraphState } from '@/context/GraphContext';
 import LoadingSpinner from '../assets/clipLoader';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { focusConstellation } from '@/model/graphFocus';
 
-const GraphComponent = () => {
-  const {
-    hoveredNode,
-    setHoveredNode,
-    isShowSide,
-    graphData,
-    clickNode,
-    parseNearbyNodes,
-  } = useGraphState();
-  const [nearbyNodes, setNearbyNodes] = useState<string[]>([]);
-  const [nearbyEdges, setNearbyEdges] = useState<
-    { source: string; target: string }[]
-  >([]);
-
+const GraphComponent = ({ compact = false }: { compact?: boolean }) => {
+  const { hoveredNode, selectedNode, setHoveredNode, graphData, clickNode } =
+    useGraphState();
+  const host = useRef<HTMLDivElement>(null);
+  const [scale, setScale] = useState(1);
   useEffect(() => {
-    if (isShowSide && hoveredNode) {
-      const nodes = parseNearbyNodes(hoveredNode);
-      setNearbyNodes(nodes);
-      const edges = graphData.links.filter(
-        (link: any) =>
-          link.source === hoveredNode || link.target === hoveredNode,
+    const element = host.current;
+    if (!element) return;
+    const resize = () => {
+      const { width, height } = element.getBoundingClientRect();
+      setScale(
+        compact
+          ? Math.min(width * 0.87, height * 0.72) / 640
+          : Math.min(width / 400, height / 500) * 0.82,
       );
-      setNearbyEdges(edges);
-      console.log(edges);
-    } else {
-      setNearbyNodes([]);
-      setNearbyEdges([]);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [hoveredNode, isShowSide, parseNearbyNodes]);
-
-  // graphData가 존재할 때만 수정된 데이터를 생성합니다.
-  const modifiedGraphData = graphData
-    ? {
-        ...graphData,
-        nodes: graphData.nodes.map((node: any) => ({
-          ...node,
-          // isShowSide && hoveredNode가 있고 nearbyNodes에 포함되지 않은 경우 투명하게
-          opacity:
-            isShowSide && hoveredNode && !nearbyNodes.includes(node.id)
-              ? 0.3
-              : 0.9,
-        })),
-        links: graphData.links.map((link: any) => ({
-          ...link,
-          strokeWidth:
-            isShowSide &&
-            hoveredNode &&
-            !nearbyEdges.some((edge) => {
-              return (
-                (edge.source === link.source && edge.target === link.target) ||
-                (edge.source === link.target && edge.target === link.source)
-              );
-            })
-              ? 0.1
-              : 1.5,
-        })),
-      }
+    };
+    const observer = new ResizeObserver(resize);
+    observer.observe(element);
+    resize();
+    return () => observer.disconnect();
+  }, [compact]);
+  const data = graphData
+    ? focusConstellation(graphData, selectedNode, hoveredNode)
     : null;
-
-  if (!graphData) {
-    return (
-      <div className="flex w-screen -translate-y-20 justify-center items-center">
-        <LoadingSpinner />
-      </div>
-    );
-  }
-
-  // ✅ 노드 Hover 이벤트
-  const handleMouseOverNode = (nodeId: string | undefined) => {
-    if (!nodeId || nodeId === hoveredNode) return; // ✅ 같은 값이면 업데이트 방지
-    setHoveredNode(nodeId);
-  };
-
-  // ✅ Hover 해제 이벤트
-  const handleMouseOutNode = () => {
-    setHoveredNode(null);
-  };
-
-  // ✅ 노드 클릭 이벤트
-  const onClickNode = (nodeId: string | undefined) => {
-    if (!nodeId) return;
-    clickNode(nodeId);
-  };
-
-  const graphConfig = {
-    node: {
-      color: 'white',
-      size: 400,
-      opacity: 0.9,
-      renderLabel: false,
-      svg: './svgs/node.svg',
-    },
-    link: {
-      strokeWidth: 1.5,
-    },
-    width: 400,
-    height: 500,
-    d3: {
-      gravity: -50 * (10 - (graphData?.nodes.length || 0) / 10),
-    },
-  };
-
-  //isShowSide가 true이고 hoveredNode가 존재할 때,
-  // 주변 노드 이외는 조금 투명하게 만들어주기
-
   return (
-    <div className="flex w-screen justify-center items-center pt-28 pb-40">
-      <svg width="0" height="0">
+    <div ref={host} className="relative w-full h-full">
+      <svg width="0" height="0" aria-hidden="true">
         <defs>
           <filter id="shadow">
             <feDropShadow dx="2" dy="2" stdDeviation="3" floodColor="white" />
           </filter>
         </defs>
       </svg>
-      {/* 
-        isShowSide가 true이고 hoveredNode가 존재할 때,
-        주변 노드 이외는 조금 투명하게 만들어주기
-      */}
-
-      <style>
-        {`
-          .node {
-            transition: opacity 0.3s;
-          }
-          
-          .link {
-            transition: filter 0.3s;
-            filter: blur(1px);
-          }
-        `}
-      </style>
-
-      {modifiedGraphData && (
-        <Graph
-          id="graph-d3"
-          data={modifiedGraphData}
-          config={graphConfig}
-          onMouseOverNode={handleMouseOverNode}
-          onMouseOutNode={handleMouseOutNode}
-          onClickNode={onClickNode}
-        />
-      )}
+      <style>{`#graph-d3-graph-wrapper svg{overflow:visible}.node image {transition:opacity .25s}.link {transition:opacity .25s,stroke .25s,stroke-width .25s;filter:blur(1px)}`}</style>
+      <div
+        style={{
+          position: 'absolute',
+          left: '50%',
+          top: '50%',
+          width: 400,
+          height: 500,
+          transform: `translate(-50%,-50%) scale(${scale})`,
+          transformOrigin: 'center',
+        }}
+      >
+        {data ? (
+          <Graph
+            id="graph-d3"
+            data={data}
+            config={{
+              nodeHighlightBehavior: false,
+              linkHighlightBehavior: false,
+              node: {
+                color: 'white',
+                size: 400,
+                opacity: 0.9,
+                renderLabel: false,
+                svg: '/svgs/node.svg',
+              },
+              link: { strokeWidth: 1.5 },
+              width: 400,
+              height: 500,
+              // Weaker repulsion and shorter links as stars are added, so the
+              // whole constellation stays inside the 400×500 frame.
+              d3: {
+                gravity: -Math.min(465, 2400 / graphData.nodes.length),
+                linkLength: Math.min(100, 2400 / graphData.nodes.length),
+              },
+            }}
+            onMouseOverNode={(id) => {
+              if (id && id !== hoveredNode) setHoveredNode(id);
+            }}
+            onMouseOutNode={() => setHoveredNode(null)}
+            onClickNode={(id) => {
+              if (id) clickNode(id);
+            }}
+          />
+        ) : (
+          <LoadingSpinner />
+        )}
+      </div>
     </div>
   );
 };
-
 export default GraphComponent;

@@ -1,0 +1,13 @@
+{
+  "id": 32,
+  "title": "CNN을 활용한 캡챠 이미지 분석 및 캡챠 이미지 개선 알고리즘",
+  "date": "2019",
+  "links": {
+    "github": "",
+    "website": ""
+  },
+  "dataType": "markdown",
+  "category": "academic",
+  "content": "# CNN을 활용한 캡챠 이미지 분석 및 캡챠 이미지 개선 알고리즘\n\nCNN과 GAN으로 CAPTCHA를 분석하고, 매크로를 막을 수 있도록 CAPTCHA 이미지를 고치는 알고리즘을 만든 연구입니다.\n\n## 연구 내용\n\n- CAPTCHA 제작 및 CNN·GAN을 활용한 캡챠 이미지 분석과 캡챠 인식 알고리즘\n- CNN·GAN의 특징을 분석한 뒤 매크로 방지 캡챠 이미지 수정 알고리즘 제작\n\n## 성과\n\n- [전국 과학영재 R&E](/work?id=31) 장려상(미래창조과학부 장관상)\n- 한국정보통신학회 추계종합학술대회 1등상 — CAPTCHA 인식 알고리즘의 성능 분석, 학생논문 작성 및 교신저자 참여",
+  "edge": []
+}

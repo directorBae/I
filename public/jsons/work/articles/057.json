@@ -1,0 +1,42 @@
+{
+  "id": 57,
+  "title": "JJeomNet",
+  "date": "2025.04",
+  "links": {
+    "github": "",
+    "website": ""
+  },
+  "dataType": "markdown",
+  "category": "company",
+  "content": "# JJeomNet\n\n대학생 IT 네트워킹 커뮤니티 JJeomNet의 대표입니다. 대학생을 위한 IT 네트워킹 프로그램과 행사를 기획하고 운영합니다.\n\n## 만든 행사\n\n- [리얼톤](/work?id=58) — 실제 사용자 피드백을 받는 데모데이 결합 해커톤\n- [IT 아레나](/work?id=59) — 과기원 연합 IT 페스티벌",
+  "edge": [
+    {
+      "id": 58,
+      "content": "JJeomNet의 행사"
+    },
+    {
+      "id": 59,
+      "content": "JJeomNet의 행사"
+    },
+    {
+      "id": 60,
+      "content": "JJeomNet의 프로그램"
+    },
+    {
+      "id": 61,
+      "content": "JJeomNet의 프로그램"
+    },
+    {
+      "id": 62,
+      "content": "JJeomNet의 프로그램"
+    },
+    {
+      "id": 63,
+      "content": "JJeomNet의 프로그램"
+    },
+    {
+      "id": 64,
+      "content": "JJeomNet의 프로그램"
+    }
+  ]
+}

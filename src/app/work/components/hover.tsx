@@ -8,70 +8,31 @@
 
 // QueryString이 없으면, 404 페이지로 이동시키기
 // QueryString이 잘못된 경우, 404 페이지로 이동시키기
-"use client";
+'use client';
 
-import { motion, AnimatePresence } from "framer-motion";
-import { useGraphState } from "@/context/GraphContext";
-import { useEffect, useState } from "react";
-import Image from "next/image";
-import SwipeHolder from "@public/svgs/swipeToOpen.svg";
-import { useRouter } from "next/navigation";
+import { motion, AnimatePresence } from 'framer-motion';
+import { useGraphState } from '@/context/GraphContext';
+import styles from './work.module.css';
 
+// Hovering a star slides only its title in from the right edge.
 export const HoverArticle = () => {
-  const {
-    hoveredNode,
-    contentsData,
-    setSelectedNode,
-    setIsShowSide,
-    isShowSide,
-  } = useGraphState();
-  const [currentHoveredNode, setCurrentHoveredNode] = useState(hoveredNode);
-
-  const router = useRouter();
-
-  useEffect(() => {
-    if (hoveredNode) {
-      setCurrentHoveredNode(hoveredNode); // 내부 상태 업데이트
-    } else {
-      setCurrentHoveredNode(null);
-    }
-  }, [hoveredNode, isShowSide]);
-
-  const clickSwiper = (id: string) => {
-    setSelectedNode(id);
-    setIsShowSide(false);
-    setCurrentHoveredNode(null);
-    router.push(`/work?id=${id}`);
-  };
-
-  const shouldRender =
-    currentHoveredNode &&
-    contentsData &&
-    contentsData[currentHoveredNode] &&
-    isShowSide;
+  const { hoveredNode, contentsData } = useGraphState();
+  const title = hoveredNode ? contentsData?.[hoveredNode]?.title : null;
 
   return (
     <AnimatePresence>
-      {shouldRender && (
-        <motion.div
-          key={currentHoveredNode} // key를 주면 상태 변화 시 언마운트/마운트가 강제됨
-          initial={{ x: "100%", opacity: 0 }}
+      {title && (
+        <motion.p
+          key={hoveredNode}
+          initial={{ x: 48, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
-          exit={{ x: "100%", opacity: 0 }}
-          transition={{ type: "tween", duration: 0.4 }}
-          className="absolute top-0 right-0 w-24 h-full bg-[#fafafa] p-6 shadow-lg z-10 rounded-tl-xl rounded-bl-xl"
+          exit={{ x: 48, opacity: 0 }}
+          transition={{ type: 'tween', duration: 0.3, ease: 'easeOut' }}
+          className={styles.hoverTitle}
+          aria-live="polite"
         >
-          <div className="absolute transform -translate-x-full left-0 z-50 cursor-pointer">
-            <Image
-              src={SwipeHolder}
-              alt="swipe holder"
-              onClick={() => clickSwiper(currentHoveredNode)}
-            />
-          </div>
-          <div className="rotate-90 transform translate-x-6 origin-left w-96 font-black text-6xl z-10">
-            {contentsData[currentHoveredNode]?.title}
-          </div>
-        </motion.div>
+          {title}
+        </motion.p>
       )}
     </AnimatePresence>
   );

@@ -1,0 +1,18 @@
+{
+  "id": 26,
+  "title": "부산ICT융합해커톤",
+  "date": "2023.08",
+  "links": {
+    "github": "",
+    "website": ""
+  },
+  "dataType": "markdown",
+  "category": "award",
+  "content": "# 부산ICT융합해커톤\n\n제8회 부산ICT융합해커톤대회에서 대상(동서대학교 SW중심대학단장상, 1st Prize)을 받았습니다.\n\n차세대 IT 토픽 뉴스 제공 플랫폼 [HOT ITssue](/work?id=27)를 만들었고, 기획, 아키텍처 설계, DB 구축, 알고리즘 설계와 최종 발표를 맡았습니다.",
+  "edge": [
+    {
+      "id": 27,
+      "content": "부산ICT융합해커톤 대상 수상작"
+    }
+  ]
+}

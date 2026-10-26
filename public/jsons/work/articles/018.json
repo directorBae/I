@@ -1,0 +1,13 @@
+{
+  "id": 18,
+  "title": "사진대학 키오스크 제작기",
+  "date": "",
+  "links": {
+    "github": "",
+    "website": ""
+  },
+  "dataType": "markdown",
+  "category": "project",
+  "content": "# 사진대학 키오스크 제작기\n\n[사진대학](/work?id=17)의 사진 인화 키오스크를 하드웨어부터 소프트웨어까지 직접 만들었습니다.\n\n- 키오스크 하드웨어 설계 및 모델링, 제작\n- 키오스크 소프트웨어 웹 개발 (Flutter Web)\n- 사진대학 유니캠퍼스(UNIST점) 출시",
+  "edge": []
+}

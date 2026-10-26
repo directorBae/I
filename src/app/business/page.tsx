@@ -100,14 +100,13 @@ export default function BusinessPage() {
         </div>
       </div>
       <Picture imageSrc={HoneyBreaDPic} back={<BusinessBackCard />} />
-      <Context
-        title={BusinessData.context1.title}
-        description={BusinessData.context1.context}
-      />
-      <Context
-        title={BusinessData.context2.title}
-        description={BusinessData.context2.context}
-      />
+      {BusinessData.contexts.map((section) => (
+        <Context
+          key={section.title}
+          title={section.title}
+          description={section.context}
+        />
+      ))}
     </main>
   );
 }

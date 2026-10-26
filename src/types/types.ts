@@ -11,6 +11,8 @@ export interface ContentType {
   dataType: "markdown" | "xml" | "json";
   category:
     | "project"
+    | "company"
+    | "team"
     | "academic"
     | "article"
     | "work_experience"

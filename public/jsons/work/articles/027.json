@@ -1,0 +1,13 @@
+{
+  "id": 27,
+  "title": "HOT ITssue",
+  "date": "2023.08",
+  "links": {
+    "github": "",
+    "website": ""
+  },
+  "dataType": "markdown",
+  "category": "project",
+  "content": "# HOT ITssue\n\n차세대 IT 토픽 뉴스를 제공하는 플랫폼입니다.\n\n기획, 아키텍처 설계, DB 구축, 알고리즘 설계와 최종 발표를 맡았고, [제8회 부산ICT융합해커톤대회](/work?id=26)에서 대상(동서대학교 SW중심대학단장상)을 받았습니다.",
+  "edge": []
+}

@@ -1,0 +1,18 @@
+{
+  "id": 34,
+  "title": "국제로봇올림피아드",
+  "date": "2018.12",
+  "links": {
+    "github": "",
+    "website": ""
+  },
+  "dataType": "markdown",
+  "category": "award",
+  "content": "# 국제로봇올림피아드\n\n국제로봇올림피아드 세계대회에서 입상했습니다. [해상 쓰레기 제거 로봇](/work?id=35)을 만들어 참가했습니다.",
+  "edge": [
+    {
+      "id": 35,
+      "content": "국제로봇올림피아드 출품작"
+    }
+  ]
+}

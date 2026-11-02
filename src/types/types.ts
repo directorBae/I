@@ -21,3 +21,10 @@ export interface ContentType {
   content: string;
   edge: { id: number; content: string }[];
 }
+
+export interface DiaryType {
+  slug: string; // file name without .json
+  date: string;
+  title: string;
+  content: string;
+}

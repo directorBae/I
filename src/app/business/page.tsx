@@ -7,6 +7,7 @@ import HoneyBreaDPic from '@public/imgs/honeybread.png';
 import { BusinessBackCard } from './components/backCard';
 import Image from 'next/image';
 import ArrowLeft from '@public/svgs/arrowleft.svg';
+import DiaryIcon from '@public/svgs/diary.svg';
 import Link from 'next/link';
 import { shareMetadata } from '@/lib/site';
 
@@ -41,6 +42,22 @@ export default function BusinessPage() {
           <Image
             src={ArrowLeft}
             alt="link icon"
+            style={{
+              width: '100%',
+            }}
+          />
+        </Link>
+      </div>
+      <div className="fixed z-10 right-7 top-10 w-6 lg:w-7 xl:w-9">
+        <Link
+          href="/business/diary"
+          className="block cursor-pointer transition-transform duration-300 hover:-rotate-6"
+          aria-label="일기장"
+          title="일기장"
+        >
+          <Image
+            src={DiaryIcon}
+            alt="diary icon"
             style={{
               width: '100%',
             }}

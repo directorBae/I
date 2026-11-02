@@ -1,9 +1,10 @@
 import type { MetadataRoute } from 'next';
 import { SITE_URL } from '@/lib/site';
 import { readArticles } from '@/lib/work';
+import { readDiary } from '@/lib/diary';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const pages = ['', '/business', '/journey', '/work'].map((route) => ({
+  const pages = ['', '/business', '/business/diary', '/journey', '/work'].map((route) => ({
     url: `${SITE_URL}${route}`,
     changeFrequency: 'monthly' as const,
     priority: route ? 0.8 : 1,
@@ -15,5 +16,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'monthly' as const,
       priority: 0.6,
     }));
-  return [...pages, ...articles];
+  const diary = readDiary().map((entry) => ({
+    url: `${SITE_URL}/business/diary/${entry.slug}`,
+    changeFrequency: 'monthly' as const,
+    priority: 0.5,
+  }));
+  return [...pages, ...articles, ...diary];
 }
